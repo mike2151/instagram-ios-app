@@ -13,18 +13,22 @@
 #import "DetailViewController.h"
 #import "CommentViewController.h"
 
-@interface HomePageViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface HomePageViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSArray *posts;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) int tappedReplyButtonIndex;
+@property (assign, nonatomic) BOOL isMoreDataLoading;
+@property (nonatomic) int numPostsToGet;
 
 @end
 
 @implementation HomePageViewController
 
+
 -(void)viewDidAppear:(BOOL)animated {
     self.tappedReplyButtonIndex = -1;
+    self.numPostsToGet = 20;
 }
 
 - (void)viewDidLoad {
@@ -102,6 +106,40 @@
     [self loadTimeLine];
     [refreshControl endRefreshing];
 }
+
+-(void)loadMoreData{
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query orderByDescending:@"createdAt"];
+    [query includeKey:@"author"];
+    query.limit = self.numPostsToGet;
+    
+    // fetch data asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts != nil) {
+            self.posts = posts;
+            self.numPostsToGet = self.numPostsToGet + 20;
+            self.isMoreDataLoading = false;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if(!self.isMoreDataLoading){
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+            self.isMoreDataLoading = true;
+            [self loadMoreData];
+        }
+    }
+}
+
 
 
 #pragma mark - Navigation

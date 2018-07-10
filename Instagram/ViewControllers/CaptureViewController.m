@@ -9,6 +9,7 @@
 #import "CaptureViewController.h"
 #import <Parse/Parse.h>
 #import "Post.h"
+#import "MBProgressHUD.h"
 
 
 @interface CaptureViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -82,6 +83,7 @@
 
 
 - (IBAction)onTapPost:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     //get the image from the image view
     UIImage *imageToPost = [self.imagePreview image];
     if (imageToPost == nil) {
@@ -100,6 +102,7 @@
         post.author = user;
         [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [self performSegueWithIdentifier:@"pictureToTimeline" sender:nil];
             }
             else {
