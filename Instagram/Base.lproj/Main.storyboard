@@ -120,6 +120,9 @@
                                                     <state key="normal" title="    Likes" image="empty_heart">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="onTapLike:" destination="jcK-uG-7Ua" eventType="touchUpInside" id="R6l-Cd-cna"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qy9-dG-Gfm">
                                                     <rect key="frame" x="176" y="343" width="48" height="48"/>
@@ -143,6 +146,8 @@
                                         <connections>
                                             <outlet property="authorName" destination="hwV-Dr-Q7Z" id="oWF-ma-0cT"/>
                                             <outlet property="captionLabel" destination="DhQ-z1-D12" id="TKW-BC-PA1"/>
+                                            <outlet property="commentButton" destination="qy9-dG-Gfm" id="ZMw-Ma-H4m"/>
+                                            <outlet property="likeButton" destination="pFO-n3-mZj" id="wqa-gv-7mi"/>
                                             <outlet property="postImageView" destination="dMZ-ri-UEa" id="Bh8-S9-pz1"/>
                                             <outlet property="profilePic" destination="gSf-qB-9rf" id="vQQ-sJ-nFo"/>
                                             <segue destination="29L-OS-mBy" kind="show" id="bBZ-0L-OPf"/>
@@ -434,7 +439,7 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dN5-hx-du2"/>
+        <segue reference="bBZ-0L-OPf"/>
         <segue reference="x2c-Wf-Dos"/>
     </inferredMetricsTieBreakers>
 </document>

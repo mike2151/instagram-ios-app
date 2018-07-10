@@ -21,4 +21,35 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)onTapLike:(id)sender {
+    int likeCountint =[self.post.likeCount intValue];
+    if (likeCountint == 0) {
+        likeCountint = 1;
+    }
+    else {
+        likeCountint = 0;
+    }
+    self.post.likeCount = [NSNumber numberWithInt:likeCountint];
+    //now update
+    [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"success");
+            [self.likeButton setTitle:[NSString stringWithFormat:@"%@%@", self.post.likeCount, @"   likes"] forState:UIControlStateNormal];
+            UIImage *btnImage;
+            if (likeCountint == 0) {
+                btnImage = [UIImage imageNamed:@"empty_heart.png"];
+            }
+            else {
+                btnImage = [UIImage imageNamed:@"filled_heart.png"];
+            }
+            [self.likeButton setImage:btnImage forState:UIControlStateNormal];
+        }
+        else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    
+    
+}
+
 @end

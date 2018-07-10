@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) NSArray *posts;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) int tappedReplyButtonIndex;
 
 @end
 
@@ -23,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tappedReplyButtonIndex = -1;
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -64,8 +66,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
     PFObject *post = self.posts[indexPath.row];
+    cell.post = self.posts[indexPath.row];
     cell.captionLabel.text = post[@"caption"];
+    [cell.likeButton setTitle:[NSString stringWithFormat:@"%d%@", [cell.post.likeCount intValue], @"   likes"] forState:UIControlStateNormal];
     cell.postImageView.file = post[@"image"];
+    cell.commentButton.tag = indexPath.row;
     [cell.postImageView loadInBackground];
     cell.authorName.text = [[post[@"author"][@"username"] componentsSeparatedByString:@"@"] objectAtIndex:0];
     cell.profilePic.file = post[@"author"][@"ProfileImage"];
@@ -88,8 +93,8 @@
     if ([segue.destinationViewController isKindOfClass:[DetailViewController class]]) {
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        DetailViewController *tweetViewController = [segue destinationViewController];
-        tweetViewController.post = self.posts[indexPath.row];
+        DetailViewController *detailViewController = [segue destinationViewController];
+        detailViewController.post = self.posts[indexPath.row];
     }
 }
 
