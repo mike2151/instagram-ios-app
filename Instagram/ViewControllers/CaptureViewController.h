@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CaptureViewController : UIViewController
-
+@property (nonatomic) UIImage* imageToPost;
 @end

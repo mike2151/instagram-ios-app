@@ -322,17 +322,26 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="tpl-Zy-R6Y"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="enE-ta-hlo" appends="YES" id="VXL-ev-Ias"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="NQ6-7k-DJc"/>
                     <connections>
                         <outlet property="imageCaption" destination="3WR-ms-wLI" id="SlU-fa-PK5"/>
                         <outlet property="imagePreview" destination="tNJ-1r-A6d" id="Req-a6-PTQ"/>
                         <segue destination="8ws-Dy-sma" kind="show" identifier="pictureToTimeline" id="x2c-Wf-Dos"/>
-                        <segue destination="l6T-mw-1aA" kind="presentation" identifier="toCameraSegue" id="enQ-cG-Dol"/>
+                        <segue destination="l6T-mw-1aA" kind="show" identifier="toCameraSegue" id="enQ-cG-Dol"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KiJ-iC-zq7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="enE-ta-hlo">
+                    <connections>
+                        <action selector="onTapGesture:" destination="Zfx-U4-Kyj" id="eIQ-JR-emD"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2141.5999999999999" y="900.89955022488766"/>
         </scene>
@@ -345,7 +354,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sv7-1Q-KcD">
-                                <rect key="frame" x="163" y="590" width="48" height="48"/>
+                                <rect key="frame" x="163" y="544" width="48" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="circle"/>
                                 <connections>
@@ -353,7 +362,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3YW-rF-RZj">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="488"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.84356011284722221" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -363,6 +372,7 @@
                     </view>
                     <connections>
                         <outlet property="liveView" destination="3YW-rF-RZj" id="ntc-TV-hAg"/>
+                        <segue destination="Zfx-U4-Kyj" kind="show" identifier="cameraToPost" id="6Y4-tg-fLk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S9C-tO-J5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -538,6 +548,7 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="6Y4-tg-fLk"/>
         <segue reference="bBZ-0L-OPf"/>
         <segue reference="x2c-Wf-Dos"/>
     </inferredMetricsTieBreakers>

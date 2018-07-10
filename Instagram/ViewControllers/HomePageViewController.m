@@ -29,6 +29,7 @@
 -(void)viewDidAppear:(BOOL)animated {
     self.tappedReplyButtonIndex = -1;
     self.numPostsToGet = 20;
+    [self loadTimeLine];
 }
 
 - (void)viewDidLoad {

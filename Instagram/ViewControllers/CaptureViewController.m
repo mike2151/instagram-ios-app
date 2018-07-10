@@ -37,26 +37,15 @@
     }];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self loadPreviewIfPossible];
 }
 
 - (IBAction)onTapTakePic:(id)sender {
-    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
-    imagePickerVC.delegate = self;
-    imagePickerVC.allowsEditing = YES;
-    imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    [self presentViewController:imagePickerVC animated:YES completion:nil];
-    
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
-    else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
+    [self performSegueWithIdentifier:@"toCameraSegue" sender:nil];
+    [self loadPreviewIfPossible];
+
 }
 
 - (IBAction)onTapUploadCameraRole:(id)sender {
@@ -66,6 +55,12 @@
     imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+-(void) loadPreviewIfPossible {
+    if (self.imageToPost != nil) {
+        [self.imagePreview setImage:self.imageToPost];
+    }
 }
 
 
@@ -103,7 +98,8 @@
         [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [self performSegueWithIdentifier:@"pictureToTimeline" sender:nil];
+                //go to timeline
+                [self.tabBarController setSelectedIndex:0];
             }
             else {
                 NSLog(@"%@", error.localizedDescription);
@@ -111,6 +107,9 @@
         }];
     }
 }
+
+
+
 
 //used for generating post Ids
 //adopted from https://stackoverflow.com/a/2633948
@@ -122,6 +121,11 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
     }
     return randomString;
+}
+
+
+- (IBAction)onTapGesture:(id)sender {
+    [self.imageCaption resignFirstResponder];
 }
 
 
