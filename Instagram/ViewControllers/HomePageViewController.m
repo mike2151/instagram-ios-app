@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "PostCell.h"
 #import <ParseUI/ParseUI.h>
+#import "DetailViewController.h"
 
 @interface HomePageViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -25,11 +26,15 @@
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
     [self loadTimeLine];
 }
 
 - (void) loadTimeLine {
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query orderByDescending:@"createdAt"];
     query.limit = 20;
     
     // fetch data asynchronously
@@ -63,17 +68,25 @@
     [cell.postImageView loadInBackground];
     
     return cell;
-    
 }
 
-/*
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self loadTimeLine];
+    [refreshControl endRefreshing];
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.destinationViewController isKindOfClass:[DetailViewController class]]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        DetailViewController *tweetViewController = [segue destinationViewController];
+        tweetViewController.post = self.posts[indexPath.row];
+    }
 }
-*/
+
 
 @end

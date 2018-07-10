@@ -69,7 +69,7 @@
             </objects>
             <point key="canvasLocation" x="284" y="26"/>
         </scene>
-        <!--Instagram-->
+        <!--Home-->
         <scene sceneID="ySN-pu-Scq">
             <objects>
                 <viewController id="8ws-Dy-sma" customClass="HomePageViewController" sceneMemberID="viewController">
@@ -116,6 +116,7 @@
                                         <connections>
                                             <outlet property="captionLabel" destination="DhQ-z1-D12" id="TKW-BC-PA1"/>
                                             <outlet property="postImageView" destination="dMZ-ri-UEa" id="Bh8-S9-pz1"/>
+                                            <segue destination="29L-OS-mBy" kind="show" id="bBZ-0L-OPf"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -124,7 +125,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="9cU-YZ-4ga"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Instagram" id="vla-ae-Vsh">
+                    <navigationItem key="navigationItem" title="Home" id="vla-ae-Vsh">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="5e7-oE-O2m">
                             <connections>
                                 <action selector="onTapLogout:" destination="8ws-Dy-sma" id="UpU-F9-g9o"/>
@@ -139,6 +140,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVc-81-ZBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2080.8000000000002" y="33.733133433283363"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="O81-VF-1Ji">
+            <objects>
+                <viewController id="29L-OS-mBy" customClass="DetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yWU-30-14s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ds0-3N-BfU" customClass="PFImageView">
+                                <rect key="frame" x="39" y="126" width="298" height="221"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sj3-0d-afQ">
+                                <rect key="frame" x="54" y="82" width="251" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number Likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDP-Ym-gDX">
+                                <rect key="frame" x="54" y="361" width="120" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Caption Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xni-Ie-dBU">
+                                <rect key="frame" x="54" y="403" width="106" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="oa4-i7-N50"/>
+                    </view>
+                    <connections>
+                        <outlet property="authorLabel" destination="Sj3-0d-afQ" id="sBs-4J-Ycd"/>
+                        <outlet property="captionLabel" destination="Xni-Ie-dBU" id="hIY-vF-9dB"/>
+                        <outlet property="numLikesLabel" destination="uDP-Ym-gDX" id="S5Q-Vh-bQz"/>
+                        <outlet property="postImage" destination="Ds0-3N-BfU" id="8K9-IQ-BRS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tLk-oR-pmm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3016.8000000000002" y="36.431784107946029"/>
         </scene>
         <!--Capture View Controller-->
         <scene sceneID="9wt-3V-uck">
