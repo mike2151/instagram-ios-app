@@ -82,22 +82,33 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="353" id="jcK-uG-7Ua" customClass="PostCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="353"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="398" id="jcK-uG-7Ua" customClass="PostCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="398"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jcK-uG-7Ua" id="LaD-Vi-f7t">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="352.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="397.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dMZ-ri-UEa" customClass="PFImageView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="302"/>
+                                                    <rect key="frame" x="0.0" y="56" width="375" height="284"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="375" id="XgQ-Fg-5Sa"/>
-                                                        <constraint firstAttribute="height" constant="302" id="jKX-sj-WIB"/>
+                                                        <constraint firstAttribute="height" constant="284" id="jKX-sj-WIB"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caption" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhQ-z1-D12">
-                                                    <rect key="frame" x="20" y="310" width="335" height="38"/>
+                                                    <rect key="frame" x="20" y="341" width="335" height="47"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gSf-qB-9rf" customClass="PFImageView">
+                                                    <rect key="frame" x="15" y="0.0" width="49" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwV-Dr-Q7Z">
+                                                    <rect key="frame" x="72" y="11" width="101" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -105,17 +116,19 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="DhQ-z1-D12" secondAttribute="trailing" constant="20" id="B6e-NL-8ON"/>
-                                                <constraint firstAttribute="bottom" secondItem="DhQ-z1-D12" secondAttribute="bottom" constant="5" id="RxI-ky-XBB"/>
-                                                <constraint firstItem="dMZ-ri-UEa" firstAttribute="top" secondItem="LaD-Vi-f7t" secondAttribute="top" id="TwT-sN-EJU"/>
-                                                <constraint firstItem="DhQ-z1-D12" firstAttribute="top" secondItem="dMZ-ri-UEa" secondAttribute="bottom" constant="8" id="nEP-D5-t6s"/>
+                                                <constraint firstAttribute="bottom" secondItem="DhQ-z1-D12" secondAttribute="bottom" constant="9.5" id="RxI-ky-XBB"/>
+                                                <constraint firstItem="dMZ-ri-UEa" firstAttribute="top" secondItem="LaD-Vi-f7t" secondAttribute="top" constant="56" id="TwT-sN-EJU"/>
+                                                <constraint firstItem="DhQ-z1-D12" firstAttribute="top" secondItem="dMZ-ri-UEa" secondAttribute="bottom" constant="1" id="nEP-D5-t6s"/>
                                                 <constraint firstItem="dMZ-ri-UEa" firstAttribute="leading" secondItem="LaD-Vi-f7t" secondAttribute="leading" id="rn3-Se-deC"/>
                                                 <constraint firstAttribute="trailing" secondItem="dMZ-ri-UEa" secondAttribute="trailing" id="trp-0U-Vd6"/>
                                                 <constraint firstItem="DhQ-z1-D12" firstAttribute="leading" secondItem="LaD-Vi-f7t" secondAttribute="leading" constant="20" id="xRd-oe-ocW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="authorName" destination="hwV-Dr-Q7Z" id="oWF-ma-0cT"/>
                                             <outlet property="captionLabel" destination="DhQ-z1-D12" id="TKW-BC-PA1"/>
                                             <outlet property="postImageView" destination="dMZ-ri-UEa" id="Bh8-S9-pz1"/>
+                                            <outlet property="profilePic" destination="gSf-qB-9rf" id="vQQ-sJ-nFo"/>
                                             <segue destination="29L-OS-mBy" kind="show" id="bBZ-0L-OPf"/>
                                         </connections>
                                     </tableViewCell>
@@ -247,6 +260,71 @@
             </objects>
             <point key="canvasLocation" x="2141.5999999999999" y="900.89955022488766"/>
         </scene>
+        <!--Profile-->
+        <scene sceneID="IIE-Aj-phv">
+            <objects>
+                <viewController id="Utc-Up-tzD" customClass="ProfileViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pnE-qn-Lhk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qs3-Qp-j3F" customClass="PFImageView">
+                                <rect key="frame" x="16" y="64" width="86" height="79"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjX-ve-PHi">
+                                <rect key="frame" x="111" y="88" width="154" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Change Profile Picture"/>
+                                <connections>
+                                    <action selector="onTapChangePic:" destination="Utc-Up-tzD" eventType="touchUpInside" id="UHY-IW-lR0"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XGN-PI-wZc">
+                                <rect key="frame" x="0.0" y="242" width="375" height="376"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="WtA-Z9-w25">
+                                    <size key="itemSize" width="159" height="158"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProfilePagePicCell" id="Hvg-2e-uKX" customClass="ProfilePagePicCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="159" height="158"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="159" height="158"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R2S-T2-i7I" customClass="PFImageView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="159" height="158"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <connections>
+                                            <outlet property="imagePreview" destination="R2S-T2-i7I" id="uf4-49-hWM"/>
+                                            <segue destination="29L-OS-mBy" kind="show" id="dN5-hx-du2"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="acT-XP-QvG"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Profile" id="M0z-BZ-Vdg"/>
+                    <connections>
+                        <outlet property="collectionView" destination="XGN-PI-wZc" id="NTq-xc-omc"/>
+                        <outlet property="profilePic" destination="qs3-Qp-j3F" id="siV-FV-Tug"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H9l-69-hXg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2141.5999999999999" y="1764.4677661169417"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="09P-H9-Pl9">
             <objects>
@@ -259,6 +337,7 @@
                     <connections>
                         <segue destination="N4L-PS-RvQ" kind="relationship" relationship="viewControllers" id="SSB-6G-LAA"/>
                         <segue destination="Zwz-4o-IWC" kind="relationship" relationship="viewControllers" id="RuW-Bd-x8Z"/>
+                        <segue destination="NM1-lb-xdj" kind="relationship" relationship="viewControllers" id="Vum-H1-fR6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vlT-Aj-38k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -303,12 +382,33 @@
             </objects>
             <point key="canvasLocation" x="1306" y="901"/>
         </scene>
+        <!--Profile-->
+        <scene sceneID="V52-GM-mz3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NM1-lb-xdj" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile_tab" id="jeH-Vt-k1Y"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xHS-sC-r2R">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Utc-Up-tzD" kind="relationship" relationship="rootViewController" id="FMS-wj-4lb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="siH-R8-RYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1305" y="1766"/>
+        </scene>
     </scenes>
     <resources>
         <image name="feed_tab" width="25" height="25"/>
         <image name="insta_camera_btn" width="25" height="25"/>
+        <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="dN5-hx-du2"/>
         <segue reference="x2c-Wf-Dos"/>
     </inferredMetricsTieBreakers>
 </document>

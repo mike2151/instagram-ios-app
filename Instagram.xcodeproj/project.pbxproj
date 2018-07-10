@@ -22,6 +22,8 @@
 		53091F8A20F4182A00FF049B /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 53091F8920F4182A00FF049B /* PostCell.m */; };
 		53091F9420F4240F00FF049B /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 53091F9320F4240F00FF049B /* Post.m */; };
 		53091F9720F4340200FF049B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53091F9620F4340200FF049B /* DetailViewController.m */; };
+		53091F9A20F50AC500FF049B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53091F9920F50AC500FF049B /* ProfileViewController.m */; };
+		53091F9D20F51D5000FF049B /* ProfilePagePicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 53091F9C20F51D5000FF049B /* ProfilePagePicCell.m */; };
 		D374770F1856A5237CA0297D /* libPods-InstagramTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51143505C4F0E8598534AE87 /* libPods-InstagramTests.a */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +75,10 @@
 		53091F9320F4240F00FF049B /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		53091F9520F4340200FF049B /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = Instagram/DetailViewController.h; sourceTree = SOURCE_ROOT; };
 		53091F9620F4340200FF049B /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = Instagram/DetailViewController.m; sourceTree = SOURCE_ROOT; };
+		53091F9820F50AC500FF049B /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		53091F9920F50AC500FF049B /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		53091F9B20F51D5000FF049B /* ProfilePagePicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilePagePicCell.h; sourceTree = "<group>"; };
+		53091F9C20F51D5000FF049B /* ProfilePagePicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfilePagePicCell.m; sourceTree = "<group>"; };
 		8749BDCC6288C77112BDEFD5 /* Pods-InstagramUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramUITests/Pods-InstagramUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A1262336CF88D258D72898C4 /* Pods-InstagramUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramUITests/Pods-InstagramUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AC21508F2F2A5042F96D134E /* Pods-Instagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.release.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +192,8 @@
 				53091F8520F4141400FF049B /* CaptureViewController.m */,
 				53091F9520F4340200FF049B /* DetailViewController.h */,
 				53091F9620F4340200FF049B /* DetailViewController.m */,
+				53091F9820F50AC500FF049B /* ProfileViewController.h */,
+				53091F9920F50AC500FF049B /* ProfileViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -195,6 +203,8 @@
 			children = (
 				53091F8820F4182A00FF049B /* PostCell.h */,
 				53091F8920F4182A00FF049B /* PostCell.m */,
+				53091F9B20F51D5000FF049B /* ProfilePagePicCell.h */,
+				53091F9C20F51D5000FF049B /* ProfilePagePicCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -437,7 +447,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				53091F8220F40F3200FF049B /* HomePageViewController.m in Sources */,
+				53091F9A20F50AC500FF049B /* ProfileViewController.m in Sources */,
 				53091F5920F3FE4900FF049B /* main.m in Sources */,
+				53091F9D20F51D5000FF049B /* ProfilePagePicCell.m in Sources */,
 				53091F4B20F3FE4800FF049B /* AppDelegate.m in Sources */,
 				53091F9720F4340200FF049B /* DetailViewController.m in Sources */,
 				53091F8620F4141400FF049B /* CaptureViewController.m in Sources */,

@@ -35,6 +35,7 @@
 - (void) loadTimeLine {
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     [query orderByDescending:@"createdAt"];
+    [query includeKey:@"author"];
     query.limit = 20;
     
     // fetch data asynchronously
@@ -66,8 +67,12 @@
     cell.captionLabel.text = post[@"caption"];
     cell.postImageView.file = post[@"image"];
     [cell.postImageView loadInBackground];
-    
+    cell.authorName.text = [[post[@"author"][@"username"] componentsSeparatedByString:@"@"] objectAtIndex:0];
+    cell.profilePic.file = post[@"author"][@"ProfileImage"];
+    [cell.profilePic loadInBackground];
+
     return cell;
+    
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
