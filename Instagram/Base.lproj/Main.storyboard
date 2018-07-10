@@ -131,6 +131,10 @@
                                                     <state key="normal" image="comment">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="onTapComment:" destination="8ws-Dy-sma" eventType="touchUpInside" id="3jD-cC-jEa"/>
+                                                        <segue destination="xmH-aT-VCT" kind="presentation" identifier="toCommentSegue" id="E3g-L1-6V1"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -174,6 +178,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVc-81-ZBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2080.8000000000002" y="33.733133433283363"/>
+        </scene>
+        <!--Comment-->
+        <scene sceneID="nhO-oo-E8z">
+            <objects>
+                <viewController id="eMp-Id-3Fr" customClass="CommentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="K2b-lb-Iqm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Comment Text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="d4v-1b-Xdv">
+                                <rect key="frame" x="16" y="95" width="343" height="204"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4O-40-ata">
+                                <rect key="frame" x="154" y="318" width="67" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Comment"/>
+                                <connections>
+                                    <action selector="onTapComment:" destination="eMp-Id-3Fr" eventType="touchUpInside" id="ayC-rd-v8E"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="mYb-0Z-keP"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Comment" id="m68-4F-vRb">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="Ei7-rD-4L9">
+                            <connections>
+                                <action selector="onTapClose:" destination="eMp-Id-3Fr" id="2rE-5t-UYA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="commentText" destination="d4v-1b-Xdv" id="TNB-Tz-xtX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ILn-Mk-nFQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3341.5999999999999" y="-756.07196401799104"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="O81-VF-1Ji">
@@ -429,6 +475,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="siH-R8-RYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1305" y="1766"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VEW-Kb-okJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xmH-aT-VCT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9XZ-Nz-tLM">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eMp-Id-3Fr" kind="relationship" relationship="rootViewController" id="gwj-Tq-ifV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xjp-UO-1Ja" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2460" y="-756"/>
         </scene>
     </scenes>
     <resources>

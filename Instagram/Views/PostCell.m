@@ -33,7 +33,6 @@
     //now update
     [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            NSLog(@"success");
             [self.likeButton setTitle:[NSString stringWithFormat:@"%@%@", self.post.likeCount, @"   likes"] forState:UIControlStateNormal];
             UIImage *btnImage;
             if (likeCountint == 0) {
@@ -48,8 +47,8 @@
             NSLog(@"%@", error.localizedDescription);
         }
     }];
-    
-    
 }
+
+
 
 @end

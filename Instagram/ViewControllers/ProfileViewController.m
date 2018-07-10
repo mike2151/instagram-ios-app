@@ -69,7 +69,6 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    [self.profilePic setImage:editedImage];
     [self dismissViewControllerAnimated:YES completion:nil];
     
     //now update user
@@ -78,7 +77,8 @@
     currUser[@"ProfileImage"]= profileFile;
     [currUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            NSLog(@"success");
+            [self.profilePic setImage:editedImage];
+            [self.profilePic loadInBackground];
         }
         else {
             NSLog(@"%@", error.localizedDescription);

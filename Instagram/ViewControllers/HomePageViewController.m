@@ -11,6 +11,7 @@
 #import "PostCell.h"
 #import <ParseUI/ParseUI.h>
 #import "DetailViewController.h"
+#import "CommentViewController.h"
 
 @interface HomePageViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -22,9 +23,12 @@
 
 @implementation HomePageViewController
 
+-(void)viewDidAppear:(BOOL)animated {
+    self.tappedReplyButtonIndex = -1;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tappedReplyButtonIndex = -1;
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -68,7 +72,16 @@
     PFObject *post = self.posts[indexPath.row];
     cell.post = self.posts[indexPath.row];
     cell.captionLabel.text = post[@"caption"];
-    [cell.likeButton setTitle:[NSString stringWithFormat:@"%d%@", [cell.post.likeCount intValue], @"   likes"] forState:UIControlStateNormal];
+    int likeCountint = [cell.post.likeCount intValue];
+    [cell.likeButton setTitle:[NSString stringWithFormat:@"%d%@", likeCountint, @"   likes"] forState:UIControlStateNormal];
+    UIImage *btnImage;
+    if (likeCountint == 0) {
+        btnImage = [UIImage imageNamed:@"empty_heart.png"];
+    }
+    else {
+        btnImage = [UIImage imageNamed:@"filled_heart.png"];
+    }
+    [cell.likeButton setImage:btnImage forState:UIControlStateNormal];
     cell.postImageView.file = post[@"image"];
     cell.commentButton.tag = indexPath.row;
     [cell.postImageView loadInBackground];
@@ -77,7 +90,12 @@
     [cell.profilePic loadInBackground];
 
     return cell;
-    
+}
+
+
+- (IBAction)onTapComment:(UIButton *)sender {
+    self.tappedReplyButtonIndex = (int) sender.tag;
+    [self performSegueWithIdentifier:@"toCommentSegue" sender:self];
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
@@ -95,6 +113,14 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.post = self.posts[indexPath.row];
+    }
+    else {
+        if (self.tappedReplyButtonIndex != -1) {
+            UINavigationController *navController = [segue destinationViewController];
+            CommentViewController *commentViewController = navController.visibleViewController;
+            commentViewController.post  = self.posts[self.tappedReplyButtonIndex];
+            self.tappedReplyButtonIndex = -1;
+        }
     }
 }
 
