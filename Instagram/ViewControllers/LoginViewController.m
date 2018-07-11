@@ -63,6 +63,11 @@
     }];
 }
 
+- (IBAction)onTapGesture:(id)sender {
+    [self.emailField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
+}
+
 /*
 #pragma mark - Navigation
 

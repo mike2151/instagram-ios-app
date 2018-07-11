@@ -40,6 +40,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self loadPreviewIfPossible];
+    CALayer *imageLayer = self.imageCaption.layer;
+    [imageLayer setCornerRadius:10];
+    [imageLayer setBorderWidth:1];
+    imageLayer.borderColor=[[UIColor lightGrayColor] CGColor];
 }
 
 - (IBAction)onTapTakePic:(id)sender {

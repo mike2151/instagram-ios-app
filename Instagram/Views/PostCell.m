@@ -33,7 +33,7 @@
     //now update
     [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            [self.likeButton setTitle:[NSString stringWithFormat:@"%@%@", self.post.likeCount, @"   likes"] forState:UIControlStateNormal];
+            [self.likeButton setTitle:[NSString stringWithFormat:@"%@%d%@", @"    ",likeCountint, @" likes"] forState:UIControlStateNormal];
             UIImage *btnImage;
             if (likeCountint == 0) {
                 btnImage = [UIImage imageNamed:@"empty_heart.png"];

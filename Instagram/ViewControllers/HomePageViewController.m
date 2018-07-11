@@ -86,7 +86,7 @@
     cell.post = self.posts[indexPath.row];
     cell.captionLabel.text = post[@"caption"];
     int likeCountint = [cell.post.likeCount intValue];
-    [cell.likeButton setTitle:[NSString stringWithFormat:@"%d%@", likeCountint, @"   likes"] forState:UIControlStateNormal];
+    [cell.likeButton setTitle:[NSString stringWithFormat:@"%@%d%@", @"    ",likeCountint, @" likes"] forState:UIControlStateNormal];
     UIImage *btnImage;
     if (likeCountint == 0) {
         btnImage = [UIImage imageNamed:@"empty_heart.png"];
@@ -103,7 +103,8 @@
     NSString *result = [formatter stringFromDate:cell.post.createdAt];
     cell.timePostedLabel.text = result;
     
-   
+    cell.profilePic.layer.cornerRadius = 25;
+    cell.profilePic.layer.masksToBounds = YES;
     cell.postImageView.file = post[@"image"];
     cell.commentButton.tag = indexPath.row;
     [cell.postImageView loadInBackground];

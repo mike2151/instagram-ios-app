@@ -19,16 +19,28 @@
 @property (weak, nonatomic) IBOutlet PFImageView *profilePic;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *posts;
+@property (weak, nonatomic) IBOutlet UILabel *userIdLabel;
 
 @end
 
 @implementation ProfileViewController
+
+
+-(void)viewDidAppear:(BOOL)animated {
+    PFUser *user = [PFUser currentUser];
+    self.profilePic.file = user[@"ProfileImage"];
+    [self.profilePic loadInBackground];
+    self.userIdLabel.text = user[@"username"];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
+    
+    self.profilePic.layer.cornerRadius = 50;
+    self.profilePic.layer.masksToBounds = YES;
     
     //get all the pictures
     [self getPictures];
@@ -38,6 +50,8 @@
     CGFloat itemWidth = self.collectionView.frame.size.width / postersPerLine;
     CGFloat itemHeight = itemWidth * 1.5;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
+    
+    
     
 }
 -(void) getPictures {

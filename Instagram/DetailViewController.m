@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (nonatomic) NSArray* comments;
 
+@property (weak, nonatomic) IBOutlet PFImageView *profilePioc;
+
 @end
 
 @implementation DetailViewController
@@ -38,12 +40,17 @@
     
     [self.postImage loadInBackground];
     [self loadComments];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     //convert email to user name
     self.authorLabel.text = [[self.post.userID componentsSeparatedByString:@"@"] objectAtIndex:0];
+    
+    self.profilePioc.file = self.post.author[@"ProfileImage"];
+    [self.profilePioc loadInBackground];
+    
     self.captionLabel.text = self.post.caption;
     self.postImage.file = self.post.image;
     //convert date to string
