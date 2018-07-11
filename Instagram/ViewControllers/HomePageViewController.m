@@ -20,6 +20,8 @@
 @property (nonatomic) int tappedReplyButtonIndex;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (nonatomic) int numPostsToGet;
+//so we know which posts we already loaded
+@property (nonatomic) NSMutableArray* postIds;
 
 @end
 
@@ -29,6 +31,7 @@
 -(void)viewDidAppear:(BOOL)animated {
     self.tappedReplyButtonIndex = -1;
     self.numPostsToGet = 20;
+    self.postIds = [[NSMutableArray alloc] init];
     [self loadTimeLine];
 }
 
@@ -52,8 +55,13 @@
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
-            self.posts = posts;
-            [self.tableView reloadData];
+            if ([self.posts count] != [posts count]) {
+                self.posts = posts;
+                for (Post* post in posts) {
+                    [self.postIds addObject:post.postID];
+                }
+                [self.tableView reloadData];
+            }
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
@@ -117,10 +125,21 @@
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
-            self.posts = posts;
-            self.numPostsToGet = self.numPostsToGet + 20;
-            self.isMoreDataLoading = false;
-            [self.tableView reloadData];
+            //temp array
+            NSMutableArray* newPosts = [NSMutableArray arrayWithArray:self.posts];
+            for (Post* post in posts) {
+                if (!([self.postIds containsObject:post.postID])) {
+                    [newPosts addObject:post.postID];
+                    [self.postIds addObject:post.postID];
+                }
+            }
+            if ([self.posts count] != [newPosts count]) {
+                self.posts = [newPosts copy];
+                self.numPostsToGet = self.numPostsToGet + 20;
+                self.isMoreDataLoading = false;
+                [self.tableView reloadData];
+            }
+            
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
