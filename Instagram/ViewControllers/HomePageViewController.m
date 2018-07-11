@@ -95,6 +95,15 @@
         btnImage = [UIImage imageNamed:@"filled_heart.png"];
     }
     [cell.likeButton setImage:btnImage forState:UIControlStateNormal];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    NSString *result = [formatter stringFromDate:cell.post.createdAt];
+    cell.timePostedLabel.text = result;
+    
+   
     cell.postImageView.file = post[@"image"];
     cell.commentButton.tag = indexPath.row;
     [cell.postImageView loadInBackground];

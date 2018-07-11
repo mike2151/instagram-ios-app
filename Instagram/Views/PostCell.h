@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *authorName;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
+@property (weak, nonatomic) IBOutlet UILabel *timePostedLabel;
 @property (strong, nonatomic) Post* post;
 
 @end

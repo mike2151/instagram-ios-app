@@ -7,24 +7,44 @@
 //
 
 #import "DetailViewController.h"
+#import "CommentViewController.h"
+#import "CommentCell.h"
+#import "ProfileViewController.h"
 
-@interface DetailViewController ()
+@interface DetailViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *postImage;
-@property (weak, nonatomic) IBOutlet UILabel *numLikesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeStampLabel;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (nonatomic) NSArray* comments;
 
 @end
 
 @implementation DetailViewController
+
+-(void)viewDidAppear:(BOOL)animated {
+    int likeCountint = [self.post.likeCount intValue];
+    [self.likeButton setTitle:[NSString stringWithFormat:@"%d%@", likeCountint, @" likes"] forState:UIControlStateNormal];
+    UIImage *btnImage;
+    if (likeCountint == 0) {
+        btnImage = [UIImage imageNamed:@"empty_heart.png"];
+    }
+    else {
+        btnImage = [UIImage imageNamed:@"filled_heart.png"];
+    }
+    [self.likeButton setImage:btnImage forState:UIControlStateNormal];
+    
+    [self.postImage loadInBackground];
+    [self loadComments];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     //convert email to user name
     self.authorLabel.text = [[self.post.userID componentsSeparatedByString:@"@"] objectAtIndex:0];
     self.captionLabel.text = self.post.caption;
-    self.numLikesLabel.text = [NSString stringWithFormat:@"%d%@", [self.post.likeCount intValue], @" likes"];
     self.postImage.file = self.post.image;
     //convert date to string
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -33,9 +53,71 @@
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     NSString *result = [formatter stringFromDate:self.post.createdAt];
     self.timeStampLabel.text = result;
-    [self.postImage loadInBackground];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+}
+- (IBAction)onTapLike:(id)sender {
+    int likeCountint =[self.post.likeCount intValue];
+    if (likeCountint == 0) {
+        likeCountint = 1;
+    }
+    else {
+        likeCountint = 0;
+    }
+    self.post.likeCount = [NSNumber numberWithInt:likeCountint];
+    //now update
+    [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            [self.likeButton setTitle:[NSString stringWithFormat:@"%@%@", self.post.likeCount, @"   likes"] forState:UIControlStateNormal];
+            UIImage *btnImage;
+            if (likeCountint == 0) {
+                btnImage = [UIImage imageNamed:@"empty_heart.png"];
+            }
+            else {
+                btnImage = [UIImage imageNamed:@"filled_heart.png"];
+            }
+            [self.likeButton setImage:btnImage forState:UIControlStateNormal];
+        }
+        else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+- (IBAction)onTapComment:(id)sender {
+    [self performSegueWithIdentifier:@"detailToCommentSegue" sender:self];
 }
 
+-(void) loadComments {
+    self.comments = self.post.comments;
+    [self.tableView reloadData];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.comments.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+    cell.textLabel.text = self.comments[indexPath.row];
+    return cell;
+}
+
+- (IBAction)onTapProfile:(id)sender {
+    [self performSegueWithIdentifier:@"detailToProfileSegue" sender:self];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[ProfileViewController class]]) {
+        ProfileViewController *profileViewController = [segue destinationViewController];
+    }
+    else {
+        UINavigationController *navController = [segue destinationViewController];
+        CommentViewController *commentViewController = navController.visibleViewController;
+        commentViewController.post  = self.post;
+    }
+}
 
 
 @end
