@@ -11,18 +11,10 @@
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
-
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
-
 @end
 
 @implementation LoginViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
 - (IBAction)onTapSignup:(id)sender {
     [self registerUser];
 }
@@ -36,9 +28,7 @@
     NSString *password = self.passwordField.text;
     
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
-        if (error != nil) {
-            NSLog(@"User log in failed: %@", error.localizedDescription);
-        } else {
+        if (error == nil) {
             [self performSegueWithIdentifier:@"firstSegue" sender:nil];
         }
     }];
@@ -55,9 +45,7 @@
     
     // call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-        if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
-        } else {
+        if (error == nil) {
             [self performSegueWithIdentifier:@"firstSegue" sender:nil];
         }
     }];
@@ -67,15 +55,5 @@
     [self.emailField resignFirstResponder];
     [self.passwordField resignFirstResponder];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

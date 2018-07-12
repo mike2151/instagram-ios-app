@@ -18,15 +18,47 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeStampLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
-@property (nonatomic) NSArray* comments;
-
 @property (weak, nonatomic) IBOutlet PFImageView *profilePioc;
-
+@property (nonatomic) NSArray* comments;
 @end
 
 @implementation DetailViewController
 
 -(void)viewDidAppear:(BOOL)animated {
+    [self setUpLikeButton];
+    [self loadComments];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //convert email to user name
+    self.authorLabel.text = [[self.post.userID componentsSeparatedByString:@"@"] objectAtIndex:0];
+    self.profilePioc.file = self.post.author[@"ProfileImage"];
+    [self.profilePioc loadInBackground];
+    
+    self.captionLabel.text = self.post.caption;
+    
+    [self setTimeStamp];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.postImage.file = self.post.image;
+    [self.postImage loadInBackground];
+}
+- (IBAction)onTapLike:(id)sender {
+    [self likePost];
+}
+
+-(void) setTimeStamp {
+    //convert date to string
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    NSString *result = [formatter stringFromDate:self.post.createdAt];
+    self.timeStampLabel.text = result;
+}
+
+-(void) setUpLikeButton {
     int likeCountint = [self.post.likeCount intValue];
     [self.likeButton setTitle:[NSString stringWithFormat:@"%d%@", likeCountint, @" likes"] forState:UIControlStateNormal];
     UIImage *btnImage;
@@ -37,33 +69,9 @@
         btnImage = [UIImage imageNamed:@"filled_heart.png"];
     }
     [self.likeButton setImage:btnImage forState:UIControlStateNormal];
-    
-    [self.postImage loadInBackground];
-    [self loadComments];
-    
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    //convert email to user name
-    self.authorLabel.text = [[self.post.userID componentsSeparatedByString:@"@"] objectAtIndex:0];
-    
-    self.profilePioc.file = self.post.author[@"ProfileImage"];
-    [self.profilePioc loadInBackground];
-    
-    self.captionLabel.text = self.post.caption;
-    self.postImage.file = self.post.image;
-    //convert date to string
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-    [formatter setDateStyle:NSDateFormatterShortStyle];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
-    NSString *result = [formatter stringFromDate:self.post.createdAt];
-    self.timeStampLabel.text = result;
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-}
-- (IBAction)onTapLike:(id)sender {
+- (void)likePost {
     int likeCountint =[self.post.likeCount intValue];
     if (likeCountint == 0) {
         likeCountint = 1;
@@ -90,6 +98,7 @@
         }
     }];
 }
+
 - (IBAction)onTapComment:(id)sender {
     [self performSegueWithIdentifier:@"detailToCommentSegue" sender:self];
 }
@@ -102,7 +111,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.comments.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];

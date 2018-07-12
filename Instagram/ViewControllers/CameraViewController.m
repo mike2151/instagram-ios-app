@@ -12,13 +12,10 @@
 
 @interface CameraViewController ()  <AVCapturePhotoCaptureDelegate>
 @property (weak, nonatomic) IBOutlet UIView *liveView;
-
 @property (nonatomic) AVCaptureSession *session;
 @property (nonatomic) AVCapturePhotoOutput *stillImageOutput;
 @property (nonatomic) AVCaptureVideoPreviewLayer *videoPreviewLayer;
-
 @property (nonatomic) UIImage* imageToPost;
-
 @end
 
 @implementation CameraViewController
@@ -27,7 +24,6 @@
     [super viewDidAppear:animated];
     self.videoPreviewLayer.frame = self.liveView.bounds;
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,15 +39,15 @@
     }
     else if (self.session && [self.session canAddInput:input]) {
         [self.session addInput:input];
-        // The remainder of the session setup will go here...
     }
     self.stillImageOutput = [AVCapturePhotoOutput new];
     if ([self.session canAddOutput:self.stillImageOutput]) {
         [self.session addOutput:self.stillImageOutput];
-        
-        //Configure the Live Preiview here
-        
     }
+    [self setUpLivePreview];
+}
+
+-(void) setUpLivePreview {
     self.videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
     if (self.videoPreviewLayer) {
         self.videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect;
@@ -67,15 +63,11 @@
 }
 
 - (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhoto:(AVCapturePhoto *)photo error:(nullable NSError *)error {
-    
     NSData *imageData = photo.fileDataRepresentation;
     UIImage *image = [self fixOrientationOfImage: ([UIImage imageWithData:imageData])];
     self.imageToPost= image;
     [self performSegueWithIdentifier:@"cameraToPost" sender:nil];
 }
-
-
-
 
 #pragma mark - Navigation
 
@@ -85,6 +77,7 @@
     captureViewController.imageToPost = self.imageToPost;
 }
 
+//rotate image by 90 degreees because custom camera does not take correct orientation
 //from  https://stackoverflow.com/a/16074603
 - (UIImage *)fixOrientationOfImage:(UIImage *)image {
     

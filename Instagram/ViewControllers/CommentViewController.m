@@ -15,12 +15,6 @@
 
 @implementation CommentViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
-
 - (IBAction)onTapClose:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
 }
