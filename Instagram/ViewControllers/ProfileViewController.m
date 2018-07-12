@@ -13,6 +13,7 @@
 #import "Post.h"
 #import "DetailViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "PFUser+PFUser_userModel.h"
 
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet PFImageView *profilePic;
@@ -58,11 +59,12 @@
     //now update user
     PFUser *currUser = [PFUser currentUser];
     PFFile *profileFile = [PFFile fileWithName:@"photo.png" data:UIImagePNGRepresentation(editedImage)];
-    currUser[@"ProfileImage"]= profileFile;
+    currUser.ProfileImage = profileFile;
     [currUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             [self.profilePic setImage:editedImage];
             [self.profilePic loadInBackground];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"timelineNeedsUpdate" object:self];
         }
         else {
             NSLog(@"%@", error.localizedDescription);

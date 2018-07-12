@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HomePageViewController : UIViewController
-
+- (void) loadTimeLine;
 @end

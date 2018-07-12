@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
 @property (weak, nonatomic) IBOutlet UILabel *timePostedLabel;
 @property (strong, nonatomic) Post* post;
+-(void) setCellInfo;
 
 @end

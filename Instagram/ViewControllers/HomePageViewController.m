@@ -44,6 +44,8 @@
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
     [self loadTimeLine];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadTimeLineitlec) name:@"timelineNeedsUpdate" object:nil];
 }
 
 - (void) loadTimeLine {
@@ -52,7 +54,6 @@
     [query includeKey:@"author"];
     query.limit = 20;
     
-    // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
             if ([self.posts count] != [posts count]) {
@@ -82,36 +83,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
-    PFObject *post = self.posts[indexPath.row];
     cell.post = self.posts[indexPath.row];
-    cell.captionLabel.text = post[@"caption"];
-    int likeCountint = [cell.post.likeCount intValue];
-    [cell.likeButton setTitle:[NSString stringWithFormat:@"%@%d%@", @"    ",likeCountint, @" likes"] forState:UIControlStateNormal];
-    UIImage *btnImage;
-    if (likeCountint == 0) {
-        btnImage = [UIImage imageNamed:@"empty_heart.png"];
-    }
-    else {
-        btnImage = [UIImage imageNamed:@"filled_heart.png"];
-    }
-    [cell.likeButton setImage:btnImage forState:UIControlStateNormal];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-    [formatter setDateStyle:NSDateFormatterShortStyle];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
-    NSString *result = [formatter stringFromDate:cell.post.createdAt];
-    cell.timePostedLabel.text = result;
-    
-    cell.profilePic.layer.cornerRadius = 25;
-    cell.profilePic.layer.masksToBounds = YES;
-    cell.postImageView.file = post[@"image"];
+    [cell setCellInfo];
     cell.commentButton.tag = indexPath.row;
-    [cell.postImageView loadInBackground];
-    cell.authorName.text = [[post[@"author"][@"username"] componentsSeparatedByString:@"@"] objectAtIndex:0];
-    cell.profilePic.file = post[@"author"][@"ProfileImage"];
-    [cell.profilePic loadInBackground];
-
     return cell;
 }
 

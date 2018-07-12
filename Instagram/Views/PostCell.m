@@ -50,5 +50,38 @@
 }
 
 
+-(void) setCellInfo {
+    self.captionLabel.text = self.post[@"caption"];
+    int likeCountint = [self.post.likeCount intValue];
+    [self.likeButton setTitle:[NSString stringWithFormat:@"%@%d%@", @"    ",likeCountint, @" likes"] forState:UIControlStateNormal];
+    UIImage *btnImage;
+    if (likeCountint == 0) {
+        btnImage = [UIImage imageNamed:@"empty_heart.png"];
+    }
+    else {
+        btnImage = [UIImage imageNamed:@"filled_heart.png"];
+    }
+    [self.likeButton setImage:btnImage forState:UIControlStateNormal];
+    [self setTimeStamp];
+    
+    self.profilePic.layer.cornerRadius = 25;
+    self.profilePic.layer.masksToBounds = YES;
+    self.postImageView.file = self.post[@"image"];
+    
+    [self.postImageView loadInBackground];
+    self.authorName.text = [[self.post[@"author"][@"username"] componentsSeparatedByString:@"@"] objectAtIndex:0];
+    self.profilePic.file = self.post[@"author"][@"ProfileImage"];
+    [self.profilePic loadInBackground];
+}
+
+-(void) setTimeStamp {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    NSString *result = [formatter stringFromDate:self.post.createdAt];
+    self.timePostedLabel.text = result;
+}
+
 
 @end
