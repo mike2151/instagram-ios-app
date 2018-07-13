@@ -64,7 +64,6 @@
         if (succeeded) {
             [self.profilePic setImage:editedImage];
             [self.profilePic loadInBackground];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"timelineNeedsUpdate" object:self];
         }
         else {
             NSLog(@"%@", error.localizedDescription);

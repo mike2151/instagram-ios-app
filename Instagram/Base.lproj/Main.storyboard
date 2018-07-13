@@ -269,7 +269,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ds0-3N-BfU" customClass="PFImageView">
-                                <rect key="frame" x="29" y="110" width="317" height="221"/>
+                                <rect key="frame" x="29" y="154" width="317" height="221"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="317" id="5AA-tK-deC"/>
                                     <constraint firstAttribute="height" constant="221" id="zNm-6u-6ni"/>
@@ -286,7 +286,7 @@
                                 </connections>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xPV-Wq-UIB">
-                                <rect key="frame" x="0.0" y="499" width="375" height="168"/>
+                                <rect key="frame" x="0.0" y="543" width="375" height="75"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" id="b9S-Ju-BOh" customClass="CommentCell">
@@ -347,7 +347,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dpx-RC-PQd" customClass="PFImageView">
-                                <rect key="frame" x="29" y="56" width="49" height="49"/>
+                                <rect key="frame" x="29" y="100" width="49" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="UhY-XK-Wv1"/>
                                     <constraint firstAttribute="width" constant="49" id="bXD-iI-jaL"/>
@@ -531,14 +531,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qs3-Qp-j3F" customClass="PFImageView">
-                                <rect key="frame" x="16" y="97" width="80" height="80"/>
+                                <rect key="frame" x="16" y="141" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="1ia-ik-y8r"/>
                                     <constraint firstAttribute="height" constant="80" id="omh-n4-59k"/>
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XGN-PI-wZc">
-                                <rect key="frame" x="0.0" y="242" width="375" height="376"/>
+                                <rect key="frame" x="0.0" y="286" width="375" height="376"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="376" id="WeK-xK-T0y"/>
@@ -571,13 +571,13 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6n-gb-sVT">
-                                <rect key="frame" x="128" y="124" width="54" height="26"/>
+                                <rect key="frame" x="128" y="168" width="54" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjX-ve-PHi">
-                                <rect key="frame" x="16" y="184" width="154" height="30"/>
+                                <rect key="frame" x="16" y="228" width="154" height="30"/>
                                 <state key="normal" title="Change Profile Picture"/>
                                 <connections>
                                     <action selector="onTapChangePic:" destination="Utc-Up-tzD" eventType="touchUpInside" id="UHY-IW-lR0"/>
@@ -714,10 +714,10 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hVn-Ld-Jaz"/>
+        <segue reference="E3g-L1-6V1"/>
         <segue reference="qxA-al-T3e"/>
         <segue reference="CJU-nw-qeI"/>
-        <segue reference="dN5-hx-du2"/>
+        <segue reference="bBZ-0L-OPf"/>
         <segue reference="x2c-Wf-Dos"/>
     </inferredMetricsTieBreakers>
 </document>

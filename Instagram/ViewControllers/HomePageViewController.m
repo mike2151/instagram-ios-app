@@ -44,9 +44,7 @@
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
     [self loadTimeLine];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadTimeLineitlec) name:@"timelineNeedsUpdate" object:nil];
-}
+    }
 
 - (void) loadTimeLine {
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
